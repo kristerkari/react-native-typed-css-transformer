@@ -1,0 +1,84 @@
+# react-native-typed-css-transformer
+
+[![NPM version](http://img.shields.io/npm/v/react-native-typed-css-transformer.svg)](https://www.npmjs.org/package/react-native-typed-css-transformer)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
+
+Load CSS files to [react native style objects](https://facebook.github.io/react-native/docs/style.html).
+
+This transformer also generates `.d.ts` Typescript typings for the CSS files. Notice that platform specific extensions are not supported in the Typescript typings.
+
+> This transformer can be used together with [React Native CSS modules](https://github.com/kristerkari/react-native-css-modules).
+
+## Usage
+
+### Step 1: Install
+
+```sh
+yarn add --dev react-native-typed-css-transformer
+```
+
+### Step 2: Configure the react native packager
+
+Add this to your `rn-cli.config.js` (make one if you don't have one already):
+
+```js
+module.exports = {
+  getTransformModulePath() {
+    return require.resolve("react-native-typed-css-transformer");
+  },
+  getSourceExts() {
+    return ["ts", "tsx", "css"];
+  }
+};
+```
+
+...or if you are using [Expo](https://expo.io/), in `app.json`:
+
+```json
+{
+  "expo": {
+    "packagerOpts": {
+      "sourceExts": ["ts", "tsx", "css"],
+      "transformer": "node_modules/react-native-typed-css-transformer/index.js"
+    }
+  }
+}
+```
+
+## How does it work?
+
+Your `App.css` file might look like this:
+
+```css
+.myClass {
+  color: blue;
+}
+.myOtherClass {
+  color: red;
+}
+```
+
+When you import your stylesheet:
+
+```js
+import styles from "./App.css";
+```
+
+Your imported styles will look like this:
+
+```js
+var styles = {
+  myClass: {
+    color: "blue"
+  },
+  myOtherClass: {
+    color: "red"
+  }
+};
+```
+
+You can then use that style object with an element:
+
+```jsx
+<MyElement style={styles.myClass} />
+```
