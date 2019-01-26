@@ -1,7 +1,8 @@
 # react-native-typed-css-transformer
 
 [![NPM version](http://img.shields.io/npm/v/react-native-typed-css-transformer.svg)](https://www.npmjs.org/package/react-native-typed-css-transformer)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
+[![Downloads per month](https://img.shields.io/npm/dm/react-native-css-transformer.svg)](http://npmcharts.com/compare/react-native-css-transformer?periodLength=30)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
 Load CSS files to [react native style objects](https://facebook.github.io/react-native/docs/style.html).
 
@@ -19,7 +20,7 @@ yarn add --dev react-native-typed-css-transformer
 
 ### Step 2: Configure the react native packager
 
-#### For React Native v0.57 or newer
+#### For React Native v0.57 or newer / Expo SDK v31.0.0 or newer
 
 Add this to `rn-cli.config.js` in your project's root (create the file if it does not exist already):
 
@@ -43,9 +44,21 @@ module.exports = (async () => {
 })();
 ```
 
-#### For React Native v0.56 or older
+If you are using [Expo](https://expo.io/), you also need to add this to `app.json`:
 
-Add this to `rn-cli.config.js` in your project's root (create the file if it does not exist already):
+```json
+{
+  "expo": {
+    "packagerOpts": {
+      "config": "rn-cli.config.js"
+    }
+  }
+}
+```
+
+#### For React Native v0.56 or older / Expo SDK v30.0.0 or older
+
+If you are using React Native without Expo, add this to `rn-cli.config.js` in your project's root (create the file if you don't have one already):
 
 ```js
 module.exports = {
@@ -58,7 +71,7 @@ module.exports = {
 };
 ```
 
-...or if you are using [Expo](https://expo.io/), in `app.json`:
+If you are using [Expo](https://expo.io/), instead of adding the `rn-cli.config.js` file, you need to add this to `app.json`:
 
 ```json
 {
