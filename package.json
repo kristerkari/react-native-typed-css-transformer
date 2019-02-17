@@ -1,6 +1,6 @@
 {
   "name": "react-native-typed-css-transformer",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "CSS transformer with Typescript support for React Native",
   "main": "index.js",
   "repository": "https://github.com/kristerkari/react-native-typed-css-transformer",
